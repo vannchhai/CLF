@@ -1,0 +1,42 @@
+<html>
+<head>
+	<title>test</title>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<button id="post">POST</button>
+</body>
+
+<script type="text/javascript">
+$(document).ready(function(){
+ $('#post').on('click',function(){
+     var data = '{"name" : "vannchhai","email" : "admin@gmail.com","phone" : "0323263565","password" : "Pa$$w0rd"}';
+     $.ajax({
+              beforeSend: function (jqXHR, settings) {
+        jqXHR.setRequestHeader('Authorization', 'Basic ' + btoa('myuser:MyNewPswd'));
+    },
+    headers: {
+        'Authorization': 'Basic ' + btoa('myuser:mypswd')
+    },
+             type: "get",
+             url: "http://localhost:8000/api/login",
+             // data: JSON.stringify(data),
+             contentType: "application/json; charset=utf-8",
+             crossDomain: true,
+             dataType: "json",
+             success: function (data, status, jqXHR) {
+
+                 alert(success);
+             },
+
+             error: function (jqXHR, status) {
+                 // error handler
+                 console.log(jqXHR);
+                 alert('fail' + status.code);
+             }
+          });
+    });
+
+});
+</script>
+</html>
